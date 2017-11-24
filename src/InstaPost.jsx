@@ -5,8 +5,8 @@ export default class InstaPost extends Component {
         const {post} = this.props;
         return (
             <div>
-                <image src={post.images.standard_resolution.url}/>
-                <p>{post.caption.text}</p>
+                <img src={post.images.standard_resolution.url}/>
+                <p>{post.caption ? post.caption.text : '#nocaption'}</p>
                 <p>{post.likes.count}</p>
             </div>
         )

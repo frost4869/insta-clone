@@ -11,13 +11,8 @@ const clientId = "8abc941757a84a07ad84e33d86ebdd19";
 class App extends Component {
 
   constructor(props){
-    console.log("test data", test_data);
     super(props);
-    this.state = {
-      state: '',
-      posts: test_data,
-      token: ''
-    }
+    this.state = {}
   }
 
   componentWillMount() {
@@ -48,7 +43,6 @@ class App extends Component {
     }
   }
   render() {
-    console.log('App.render')
     const toggleState = () => {
       const newState = this.state.title ? null : 'Toggle state';
       this.setState({

@@ -5,15 +5,11 @@ import InstaPost from './InstaPost'
 export default class InstaList extends Component {
     render() {
         const { posts } = this.props;
-        console.log(posts)
+        posts.map(q => console.log(q.id))
         return (
-            <div>
-                {
-                    posts.map((post) => {
-                        <InstaPost posts={post}/>
-                    })
-                }
-            </div>
+            posts.map(q => 
+                <InstaPost post={q}/>
+            )
         )
     }
 }

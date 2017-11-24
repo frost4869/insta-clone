@@ -4,41 +4,38 @@ import fetchJsonp from 'fetch-jsonp'
 
 export default class InstaContainer extends Component {
     constructor(props) {
-        super(props)
-        this.state = {
-            posts: [],
-            loading: false
-        }
+        super(props);
+        this.state = {};
     }
 
     componentWillMount() {
-        this.loadData.bind(this)();
+        this
+            .loadData
+            .bind(this)();
     }
 
     loadData() {
-        this.setState({
-            loading: true
-        })
+        this.setState({ loading: true })
+        let api_url = `https://api.instagram.com/v1/users/self/media/recent?access_token=${this.props.token}`;
 
-        console.log(`https://api.instagram.com/v1/users/self/media/recent?access_token=${this.props.token}`)
-        fetchJsonp(`https://api.instagram.com/v1/users/self/media/recent?access_token=${this.props.token}`)
-        .then((data) => {
+        console.log(api_url);
+
+        fetchJsonp(api_url).then((data) => {
             return data.json();
         }).then((json) => {
-            this.setState({
-                posts: json,
-                loading:false
-            })
+            this.setState({ posts: json, loading: false })
         })
     }
 
     render() {
-        const posts = this.state.posts && this.state.posts.data; 
-        console.log(this.state.posts)
-        return (
-            <div>
-                <InstaList posts={posts} loading={this.state.loading}/>                
-            </div>
-        )
+        const posts = this.state.posts && this.state.posts.data;
+        if (posts) {
+            return (<InstaList posts={posts} loading={this.state.loading} />);
+        } else {
+            return (
+                <h3>Wait...</h3>
+            )
+        }
+
     }
 }
